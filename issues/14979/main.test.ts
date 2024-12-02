@@ -14,6 +14,8 @@ test.if(isWindows)("Panic when passing an existing/default import condition to -
 
     // if it crashes its not 0
     expect(process.exitCode).not.toBe(0); 
+    expect(await new Response(process.stderr).text())
+        .toInclude('panic(main thread): reached unreachable code')
 
 });
 
