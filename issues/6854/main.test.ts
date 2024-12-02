@@ -3,8 +3,8 @@ import { it, expect } from "bun:test";
 it("bun build should hoist \"use client\"", async () => {
 
     await Bun.build({
-        entrypoints: [import.meta.dir+"\\form.tsx"],
-        outdir: import.meta.dir + "\\dist", 
+        entrypoints: [import.meta.dir+"/form.tsx"],
+        outdir: import.meta.dir + "/dist", 
     })
 
     const content = await Bun.file(import.meta.dir + "/dist/form.js").text()
