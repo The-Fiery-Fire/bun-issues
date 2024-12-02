@@ -8,17 +8,16 @@ on:
   workflow_dispatch:
   push:
 
-permissions:
-  contents: write
-
 jobs:
   # Move closed issue folders before running tests
   move-closed-issue-folders:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       # Check out the repository
       - name: Check out repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
           
       # Set up Bun (using canary version)
       - name: Set up Bun
@@ -35,8 +34,6 @@ jobs:
       # Commit the changes if any folders were moved
       - name: Commit changes
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GH_ACTION_REPOSITORY
-          git checkout "${GITHUB_REF:11}" 
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add .
@@ -56,6 +53,8 @@ jobs:
       # Check out the repository
       - name: Check out repository
         uses: actions/checkout@v3
+        with:
+          ref: main
 
       # Set up Bun (using canary version)
       - name: Set up Bun
