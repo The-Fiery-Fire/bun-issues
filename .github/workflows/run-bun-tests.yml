@@ -8,6 +8,9 @@ on:
   workflow_dispatch:
   push:
 
+permissions:
+  contents: write
+
 jobs:
   # Move closed issue folders before running tests
   move-closed-issue-folders:
