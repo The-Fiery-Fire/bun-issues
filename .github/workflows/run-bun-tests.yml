@@ -19,6 +19,8 @@ jobs:
       # Check out the repository
       - name: Check out repository
         uses: actions/checkout@v3
+        with: 
+          persist-credentials: false 
 
       # Set up Bun (using canary version)
       - name: Set up Bun
