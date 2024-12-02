@@ -35,7 +35,7 @@ jobs:
       # Commit the changes if any folders were moved
       - name: Commit changes
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/username/repository
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.action_repository}}
           git checkout "${GITHUB_REF:11}" 
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
