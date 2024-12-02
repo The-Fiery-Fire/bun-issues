@@ -1,0 +1,66 @@
+name: Run Bun Tests
+
+on:
+  # Schedule to run daily at midnight UTC
+  schedule:
+    - cron: '0 0 * * *'
+  # Allow manual triggering of the workflow
+  workflow_dispatch:
+  push:
+
+jobs:
+  # Move closed issue folders before running tests
+  move-closed-issue-folders:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      # Set up Bun (using canary version)
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: canary
+
+      # Install dependencies (Octokit to interact with GitHub API)
+      - run: bun install --frozen-lockfile
+
+      # Run the TypeScript script to move folders based on closed issue IDs
+      - name: Run folder move script
+        run: |
+          bun run move-closed-issues.ts
+
+      # Commit the changes if any folders were moved
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Move closed issues to 'closed' folder" || echo "No changes to commit"
+          git push
+
+  bun-test:
+    runs-on: ${{ matrix.os }}
+    needs: move-closed-issue-folders
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      # Check out the repository
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      # Set up Bun (using canary version)
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: canary
+
+      # Install dependencies
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # Run tests
+      - name: Run tests
+        run: bun test
