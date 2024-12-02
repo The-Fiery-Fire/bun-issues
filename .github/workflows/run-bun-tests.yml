@@ -23,8 +23,6 @@ jobs:
       # Set up Bun (using canary version)
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: canary
 
       # Install dependencies (Octokit to interact with GitHub API)
       - run: bun install --frozen-lockfile

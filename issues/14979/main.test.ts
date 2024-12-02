@@ -1,7 +1,9 @@
 import { test, expect } from "bun:test";
 import { spawn } from "bun";
+import { isWindows } from "../../utils";
 
-test("Panic when passing an existing/default import condition to --conditions ", async () => {
+// seems to only crash on windows
+test.if(isWindows)("Panic when passing an existing/default import condition to --conditions ", async () => {
     const process = spawn({
         cmd: ["bun", '--conditions=import', "./index.ts"],
         stdout: "pipe",
