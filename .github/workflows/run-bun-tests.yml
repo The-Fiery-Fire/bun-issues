@@ -19,6 +19,8 @@ jobs:
       # Check out the repository
       - name: Check out repository
         uses: actions/checkout@v1
+          
+      - run: git checkout main
 
       # Set up Bun (using canary version)
       - name: Set up Bun
