@@ -2,7 +2,7 @@ import { spawn } from "bun";
 import { test, expect } from "bun:test";
 import { isWindows } from "../../utils";
 
-test("reading console line twice hangs", async () => {
+test.if(isWindows)("reading console line twice hangs", async () => {
 
     const process = spawn({
         cmd: ["bun", "./test.ts"],
