@@ -6,7 +6,9 @@ on:
     - cron: '0 0 * * *'
   # Allow manual triggering of the workflow
   workflow_dispatch:
-  push:
+  push:  
+  repository_dispatch:
+    types: [publish-trigger]
 
 permissions:
   contents: write
@@ -19,8 +21,6 @@ jobs:
       # Check out the repository
       - name: Check out repository
         uses: actions/checkout@v3
-        with: 
-          persist-credentials: false 
 
       # Set up Bun (using canary version)
       - name: Set up Bun
@@ -42,6 +42,16 @@ jobs:
           git add .
           git commit -m "Move closed issues to 'closed' folder" || echo "No changes to commit"
           git push
+
+      - name: Trigger Publish Workflow
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.createDispatchEvent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event_type: 'publish-trigger',
+            });
 
   bun-test:
     runs-on: ${{ matrix.os }}
