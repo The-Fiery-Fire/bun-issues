@@ -45,9 +45,9 @@ jobs:
 
   bun-test:
     runs-on: ${{ matrix.os }}
-    continue-on-error: true
     needs: move-closed-issue-folders
     strategy:
+      fail-fast: false 
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
