@@ -20,8 +20,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v1
           
-      - run: git checkout main
-
       # Set up Bun (using canary version)
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
@@ -37,6 +35,8 @@ jobs:
       # Commit the changes if any folders were moved
       - name: Commit changes
         run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/username/repository
+          git checkout "${GITHUB_REF:11}" 
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add .
