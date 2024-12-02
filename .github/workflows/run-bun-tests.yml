@@ -36,15 +36,18 @@ jobs:
 
       # Commit the changes if any folders were moved
       - name: Commit changes
+        id: commit
+        continue-on-error: true
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add .
-          git commit -m "Move closed issues to 'closed' folder" || echo "No changes to commit"
+          git commit -m "Move closed issues to 'closed' folder"
           git push
 
       - name: Trigger Publish Workflow
         uses: actions/github-script@v7
+        if: steps.commit.outcome == 'success' && github.event_name == 'push'
         with:
           script: |
             github.rest.repos.createDispatchEvent({
