@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "namespace": [
+                "namespace.d.ts"
+            ]
+        }
+    }
+}
