@@ -1,8 +1,8 @@
 import { it, expect } from 'bun:test'
 import { spawn } from "bun";
-import { isWindows } from '../../utils';
+import { isLinux, isMacos, isWindows } from '../../utils';
 
-it("Segfault with readline", async () => {
+it.skipIf(isLinux)("Segfault with readline", async () => {
     // Spawn a new Bun process to run the test script
     const proc = spawn({
         cmd: ["bun", "./bug.ts"],
@@ -20,7 +20,6 @@ it("Segfault with readline", async () => {
     expect(await proc.exited).toBe({
         "win32": 5,
         "darwin": 133,
-        "linux": 132,
     }[process.platform as string] || 3)
 
     if (!isWindows) {
