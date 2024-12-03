@@ -1,0 +1,6 @@
+{
+    "name": "15383",
+    "dependencies": {
+        "@napi-rs/canvas": "*"
+    }
+}
