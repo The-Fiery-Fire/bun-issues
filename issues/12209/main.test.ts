@@ -12,13 +12,15 @@ it("bun --eval ignores first command line arg", async () => {
   });
 
   // Capture the output
-  await proc.exited
+  // await proc.exited
   const stdout = await new Response(proc.stdout).text();
   const d = JSON.parse(stdout)
 
   // it should be this
-  expect(d).not.toEqual([process.argv[0], "1", "2", "3"])
+  expect(d).not.toEqual([Bun.which("bun"), "1", "2", "3"])
 
   // not this
-  expect(d).toEqual([process.argv[0], isWindows ? "C:\\\\[eval]" : "//[eval]", "2", "3"])
+  expect(d).toEqual([Bun.which("bun"), isWindows ? "C:\\\\[eval]" : "//[eval]", "2", "3"])
+
+  proc.kill()
 })
