@@ -1,8 +1,9 @@
 import { it, expect } from 'bun:test'
 import { spawn } from "bun";
-import { isLinux, isMacos, isWindows } from '../../utils';
+import { isLinux } from '../../utils';
 
-it.skipIf(isWindows)("Segfault with readline", async () => {
+// seems to be only linux issue
+it.if(isLinux)("Bun SIGSEGV when importing emcc output", async () => {
     // Spawn a new Bun process to run the test script
     const proc = spawn({
         cmd: ["bun", "./bug.ts"],
@@ -13,9 +14,6 @@ it.skipIf(isWindows)("Segfault with readline", async () => {
         cwd: import.meta.dir
     });
 
-    expect(await proc.exited).toBe({
-        "linux": 139,
-        "darwin": 133,
-    }[process.platform as string] || 3)
+    expect(await proc.exited).toBe(139)
 
 });
