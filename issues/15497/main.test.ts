@@ -2,7 +2,8 @@ import { it, expect } from 'bun:test'
 import { spawn } from "bun";
 import { isWindows } from '../../utils';
 
-it("should fail when describe.each + it.only runs only the first input", async () => {
+// windows has a bug with reading stderr (when its created before stdout)
+it.skipIf(isWindows)("should fail when describe.each + it.only runs only the first input", async () => {
     // Spawn a new Bun process to run the test script
     const process = spawn({
         cmd: ["bun", "test", "./repro.test.ts"],
