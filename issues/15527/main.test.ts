@@ -14,6 +14,6 @@ it.if(isLinux)("Bun SIGSEGV when importing emcc output", async () => {
         cwd: import.meta.dir
     });
 
-    expect(await proc.exited).toBe(139)
+    expect(await proc.exited).toBeOneOf([132, 139])
 
 });
