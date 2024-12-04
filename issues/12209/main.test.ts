@@ -8,7 +8,7 @@ it("bun --eval ignores first command line arg", async () => {
     stdout: "pipe",
     stderr: "pipe",
 
-    cwd: '/'
+    cwd: isWindows ? "C:/" : "/"
   });
 
   // Capture the output
