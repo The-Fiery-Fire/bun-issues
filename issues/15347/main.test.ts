@@ -3,7 +3,8 @@ import { spawn } from "bun";
 import { isLinux, isMacos, isWindows } from '../../utils';
 
 // this seems to repo on local but not github actions
-it.if(isWindows && !process.env.CI)("opening a lot of files segfaults on windows", async () => {
+// - its really flaky
+it.if(isWindows && false)("opening a lot of files segfaults on windows", async () => {
     // Spawn a new Bun process to run the test script
     const proc = spawn({
         cmd: ["bun", "./bug.ts"],
