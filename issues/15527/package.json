@@ -1,0 +1,6 @@
+{
+    "name": "15527",
+    "dependencies": {
+        "capstone-wrapper": "n0thhhing/ts-capstone"
+    }
+}
