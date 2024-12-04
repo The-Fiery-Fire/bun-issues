@@ -3,8 +3,7 @@ import { spawn } from "bun";
 import { isWindows } from "../../utils";
 
 // The test script to run
-// skip on windows as it skill issues the spawn result
-it.skipIf(isWindows)("should fail when expect(...).resolves.toSatisfy(...) passes the promise directly", async () => {
+it("should fail when expect(...).resolves.toSatisfy(...) passes the promise directly", async () => {
     // Spawn a new Bun process to run the test script with the problematic behavior
     const process = spawn({
         cmd: ["bun", "test", "./promise-satisfy.test.fails.ts"], // Path to your test file

@@ -1,3 +1,5 @@
+console.log("hi")
+
 import readline from 'readline/promises';
 
 const rl1 = readline.createInterface({

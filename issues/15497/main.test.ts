@@ -2,8 +2,7 @@ import { it, expect } from 'bun:test'
 import { spawn } from "bun";
 import { isWindows } from '../../utils';
 
-// skip on windows as it skill issues the spawn result
-it.skipIf(isWindows)("should fail when describe.each + it.only runs only the first input", async () => {
+it("should fail when describe.each + it.only runs only the first input", async () => {
     // Spawn a new Bun process to run the test script
     const process = spawn({
         cmd: ["bun", "test", "./repro.test.ts"],

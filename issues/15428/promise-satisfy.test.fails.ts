@@ -1,5 +1,7 @@
 import { it, expect } from "bun:test";
 
+console.log("hi")
+
 it("compares promise value", () => {
     expect(Promise.resolve(42)).resolves.toSatisfy((v) => v === 42);
 });
