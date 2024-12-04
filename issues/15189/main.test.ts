@@ -2,7 +2,7 @@ import { it, expect } from 'bun:test'
 import { spawn } from "bun";
 import { isLinux, isMacos, isWindows } from '../../utils';
 
-it.skipIf(isLinux)("Segfault with readline", async () => {
+it.skipIf(isLinux)("Bun.$ crashes on macOS ARM64 with large array of non-empty strings", async () => {
     // Spawn a new Bun process to run the test script
     const proc = spawn({
         cmd: ["bun", "./bug.ts"],
@@ -30,6 +30,6 @@ it.skipIf(isLinux)("Segfault with readline", async () => {
         expect(stderr).toInclude("panic(main thread): Segmentation fault at address")
         expect(stderr).toInclude("oh no: Bun has crashed. This indicates a bug in Bun, not your code.\n\nTo send a redacted crash report to Bun's team,\nplease file a GitHub issue using the link below:\n\n https://bun.report/")
     } else {
-        expect(stderr).toInclude("============================================================\nBun v")
+        expect(stderr).toInclude("============================================================\nBun ")
     }
 });

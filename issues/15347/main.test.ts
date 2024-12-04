@@ -2,7 +2,7 @@ import { it, expect } from 'bun:test'
 import { spawn } from "bun";
 import { isLinux, isMacos, isWindows } from '../../utils';
 
-it("Segfault with readline", async () => {
+it.if(isWindows)("opening a lot of files segfaults on windows", async () => {
     // Spawn a new Bun process to run the test script
     const proc = spawn({
         cmd: ["bun", "./bug.ts"],
