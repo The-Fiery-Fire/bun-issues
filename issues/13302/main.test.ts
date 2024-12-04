@@ -21,4 +21,6 @@ test("AbortSignal.timeout and fetch not working when can't reach server ", async
     ]);
 
     expect(result).toBe("timed out");
+
+    process.kill()
 }, { timeout: 5000 });

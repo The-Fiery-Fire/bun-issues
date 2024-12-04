@@ -21,4 +21,5 @@ test("signal argument not used when passed to net.createConnection for connectio
     ]);
 
     expect(result).toBe("timed out");
+    process.kill()
 }, { timeout: 5000 });

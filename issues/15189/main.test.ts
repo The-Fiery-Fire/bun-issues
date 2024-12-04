@@ -6,16 +6,10 @@ it.skipIf(isLinux)("Bun.$ crashes on macOS ARM64 with large array of non-empty s
     // Spawn a new Bun process to run the test script
     const proc = spawn({
         cmd: ["bun", "./bug.ts"],
-        stdout: "pipe",
         stderr: "pipe",
-        stdin: "pipe",
 
         cwd: import.meta.dir
     });
-    await Bun.sleep(50)
-    proc.stdin.write("hello\n");
-    await Bun.sleep(100)
-    proc.stdin.write("hello\n");
 
     expect(await proc.exited).toBe({
         "win32": 5,
@@ -23,7 +17,7 @@ it.skipIf(isLinux)("Bun.$ crashes on macOS ARM64 with large array of non-empty s
     }[process.platform as string] || 3)
 
     // Capture the output
-    const stdout = await new Response(proc.stdout).text();
+    // const stdout = await new Response(proc.stdout).text();
     const stderr = await new Response(proc.stderr).text();
 
     if (!isWindows) {
@@ -32,4 +26,6 @@ it.skipIf(isLinux)("Bun.$ crashes on macOS ARM64 with large array of non-empty s
     } else {
         expect(stderr).toInclude("============================================================\nBun ")
     }
+
+    proc.kill()
 });

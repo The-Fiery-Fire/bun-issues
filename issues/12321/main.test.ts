@@ -25,4 +25,5 @@ test.if(isWindows)("reading console line twice hangs", async () => {
     ]);
 
     expect(result).toBe("timed out");
+    process.kill()
 });

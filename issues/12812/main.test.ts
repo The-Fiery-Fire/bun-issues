@@ -24,4 +24,6 @@ it("Support import mod = require() in runtime ", async () => {
   } else {
     // expect(stderr).toInclude("============================================================\nBun ")
   }
+
+  proc.kill()
 })

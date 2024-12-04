@@ -34,4 +34,6 @@ it("Segfault with readline", async () => {
     expect(stdout).toInclude("hi\nEnter your name: Hello, hello!\n")
     expect(stderr).toInclude("Segmentation fault at address ")
     expect(stderr).toInclude("oh no: Bun has crashed. This indicates a bug in Bun, not your code.\n\nTo send a redacted crash report to Bun's team,\nplease file a GitHub issue using the link below:\n\n https://bun.report/")
+
+    proc.kill()
 });
