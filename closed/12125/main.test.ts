@@ -5,7 +5,7 @@ import { isWindows } from '../../utils';
 it("readLine.createInterface closes early", async () => {
     // Spawn a new Bun process to run the test script
     const proc = spawn({
-        cmd: ["bun", "./bug.mjs"],
+        cmd: [process.argv[0], "./bug.mjs"],
         stdout: "pipe",
         stderr: "pipe",
         stdin: "pipe",

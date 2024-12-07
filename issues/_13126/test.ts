@@ -1,6 +1,6 @@
 import net from 'node:net'
 
-const signal = AbortSignal.timeout(500)
+const signal = AbortSignal.timeout(300)
 const socket = net.createConnection({
     host: 'example.com',
     port: 999,

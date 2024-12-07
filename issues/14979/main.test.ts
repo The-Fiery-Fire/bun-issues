@@ -5,7 +5,7 @@ import { isWindows } from "../../utils";
 // seems to only crash on windows
 test.if(isWindows)("Panic when passing an existing/default import condition to --conditions ", async () => {
     const proc = spawn({
-        cmd: ["bun", '--conditions=import', "./index.ts"],
+        cmd: [process.argv[0], '--conditions=import', "./index.ts"],
         stdout: "pipe",
         stderr: "pipe",
         cwd: import.meta.dir

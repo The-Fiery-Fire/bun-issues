@@ -6,7 +6,7 @@ test.skipIf(isWindows)("prompt() can't read more than 1024B on macOS", async () 
     if (isWindows) return
 
     const proc = spawn({
-        cmd: ["bun", "./test.ts"],
+        cmd: [process.argv[0], "./test.ts"],
         stdin: "pipe",
         cwd: import.meta.dir,
     });

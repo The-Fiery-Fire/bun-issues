@@ -2,10 +2,10 @@ import { spawn } from "bun";
 import { test, expect } from "bun:test";
 
 // this should timeout after 500ms
-test("AbortSignal.timeout and fetch not working when can't reach server ", async () => {
+test("AbortSignal.timeout and fetch not working when can't reach server", async () => {
 
-    const process = spawn({
-        cmd: ["bun", "./test.ts"],
+    const proc = spawn({
+        cmd: [process.argv[0], "./test.ts"],
         stdin: "pipe",
         cwd: import.meta.dir,
     });
@@ -16,11 +16,11 @@ test("AbortSignal.timeout and fetch not working when can't reach server ", async
     );
 
     const result = await Promise.race([
-        process.exited.then(e => "not timed out ??"),
+        proc.exited.then(e => "not timed out ??"),
         timeoutPromise
     ]);
 
     expect(result).toBe("timed out");
 
-    process.kill()
+    proc.kill()
 }, { timeout: 5000 });

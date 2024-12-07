@@ -4,7 +4,7 @@ import { isWindows } from "../../utils";
 
 test.if(isWindows)("bun can't read stderr from Bun.spawn", async () => {
     const proc = spawn({
-        cmd: ["bun", "./test.ts"],
+        cmd: [process.argv[0], "./test.ts"],
         stderr: "pipe",
         stdout: "pipe",
         cwd: import.meta.dir,

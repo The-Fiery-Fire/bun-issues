@@ -5,7 +5,7 @@ import { isWindows } from '../../utils';
 it("Segfault with readline", async () => {
     // Spawn a new Bun process to run the test script
     const proc = spawn({
-        cmd: ["bun", "./bug.ts"],
+        cmd: [process.argv[0], "./bug.ts"],
         stdout: "pipe",
         stderr: "pipe",
         stdin: "pipe",

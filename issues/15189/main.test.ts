@@ -5,7 +5,7 @@ import { isLinux, isMacos, isWindows } from '../../utils';
 it.skipIf(isLinux)("Bun.$ crashes on macOS ARM64 with large array of non-empty strings", async () => {
     // Spawn a new Bun process to run the test script
     const proc = spawn({
-        cmd: ["bun", "./bug.ts"],
+        cmd: [process.argv[0], "./bug.ts"],
         stderr: "pipe",
 
         cwd: import.meta.dir

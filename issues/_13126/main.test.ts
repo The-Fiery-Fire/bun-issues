@@ -4,8 +4,8 @@ import { test, expect } from "bun:test";
 // this should timeout after 500ms
 test("signal argument not used when passed to net.createConnection for connection timeouts", async () => {
 
-    const process = spawn({
-        cmd: ["bun", "./test.ts"],
+    const proc = spawn({
+        cmd: [process.argv[0], "./test.ts"],
         stdin: "pipe",
         cwd: import.meta.dir,
     });
@@ -16,10 +16,10 @@ test("signal argument not used when passed to net.createConnection for connectio
     );
 
     const result = await Promise.race([
-        process.exited.then(e => "not timed out ??"),
+        proc.exited.then(e => "not timed out ??"),
         timeoutPromise
     ]);
 
     expect(result).toBe("timed out");
-    process.kill()
+    proc.kill()
 }, { timeout: 5000 });

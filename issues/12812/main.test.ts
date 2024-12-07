@@ -5,7 +5,7 @@ import { isWindows } from "../../utils";
 
 it("Support import mod = require() in runtime ", async () => {
   const proc = spawn({
-    cmd: ["bun", "./test.tsx"],
+    cmd: [process.argv[0], "./test.tsx"],
     stdout: "pipe",
     stderr: "pipe",
     stdin: "pipe",
