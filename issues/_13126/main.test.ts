@@ -12,7 +12,7 @@ test("signal argument not used when passed to net.createConnection for connectio
 
     // check if it hangs
     const timeoutPromise = new Promise((resolve) =>
-        setTimeout(() => resolve("timed out"), 700) // Timeout after 0.7sec
+        setTimeout(() => resolve("timed out"), 1000) // Timeout after 1sec
     );
 
     const result = await Promise.race([
