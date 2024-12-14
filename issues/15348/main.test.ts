@@ -13,4 +13,5 @@ test("Macros with default import/export", async () => {
     expect(await proc.exited).not.toBe(0);
     expect(await new Response(proc.stderr).text())
         .toInclude('error: "MacroLoadError" error in macro')
+    proc.kill()
 });

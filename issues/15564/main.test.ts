@@ -15,4 +15,5 @@ test.if(isWindows)("bun can't read stderr from Bun.spawn", async () => {
 
     expect(stdout).toBe("");
     expect(stderr).not.toBe("sad");
+    proc.kill()
 });

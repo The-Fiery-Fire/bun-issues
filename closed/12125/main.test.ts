@@ -23,4 +23,6 @@ Line 3: 3
 Line 4: 4
 `)
     expect(stdout).toInclude("Line 1: 1")
+
+    proc.kill()
 });

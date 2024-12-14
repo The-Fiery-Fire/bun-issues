@@ -21,5 +21,6 @@ it.skipIf(isWindows)("should fail when expect(...).resolves.toSatisfy(...) passe
     // The bug exists if the test shows this failure message
     expect(stderr).toInclude('Expected: [Function]'); // Fail the test if this issue is still present
     expect(stderr).toInclude('error: expect(received).toSatisfy(expected)'); // Fail the test if this issue is still present
+    proc.kill()
 });
 

@@ -20,4 +20,5 @@ it.skipIf(isWindows)("should fail when describe.each + it.only runs only the fir
     expect(stderr).toInclude("(pass) test > prints")
     expect(stdout).not.toInclude("B")
     expect(stdout).not.toInclude("C")
+    proc.kill()
 });

@@ -15,5 +15,5 @@ it.if(isLinux)("Bun SIGSEGV when importing emcc output", async () => {
     });
 
     expect(await proc.exited).toBeOneOf([132, 139])
-
-});
+    proc.kill()
+}, { timeout: 10_000 });
