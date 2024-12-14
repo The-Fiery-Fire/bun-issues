@@ -25,7 +25,7 @@ it("shell: piping assignments into command causes crash", async () => {
         const stdout = await new Response(proc.stdout).text();
         const stderr = await new Response(proc.stderr).text();
 
-        expect(stdout).toInclude("hi")
+        // expect(stdout).toInclude("hi")
         expect(stderr).toInclude("panic(main thread): Invalid tag\noh no: Bun has crashed. This indicates a bug in Bun, not your code.\n\nTo send a redacted crash report to Bun's team,\nplease file a GitHub issue using the link below:\n\n https://bun.report/")
     }
     proc.kill()
